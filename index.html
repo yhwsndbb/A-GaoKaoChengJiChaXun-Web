@@ -21,7 +21,7 @@
       </div>
       <div class="form-item">
         <span>准考证号:</span>
-        <input type="text" name="userpwd" id="ksh" placeholder="请输入准考证号(10位)" />
+        <input type="text" name="userpwd" id="ksh" placeholder="请输入准考证号" />
       </div>
       <div class="form-item">
         <span>出生年月:</span>
@@ -79,7 +79,7 @@
       success: function (res) {
         console.log(res);
         if (res.code == 0) {
-
+          alert(成功);
         } else {
           alert(res.message);
         }
