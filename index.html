@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>高考查询系统</title>
+  <link rel="stylesheet" href="./public/css/comm.css" />
+  <link rel="stylesheet" type="text/css" href="./public/css/verify.css">
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>高考查询系统</h1>
+    <div class="form-list">
+      <div class="form-item">
+        <span>姓名:</span>
+        <input type="text" name="username" id="xm" placeholder="请输入姓名" />
+      </div>
+      <div class="form-item">
+        <span>准考证号:</span>
+        <input type="text" name="userpwd" id="ksh" placeholder="请输入准考证号(10位)" />
+      </div>
+      <div class="form-item">
+        <span>出生年月:</span>
+        <input type="text" name="birthday" id="birthday" placeholder="请输入出生年月(例:1998年8月13号,则19980813)" />
+      </div>
+      <div class="Captcha">
+        <div id="mpanel2">
+        </div>
+      </div>
+      <div class="btn">
+        <button id="check-btn">查询</button>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="./public/js/jquery.min.js"></script>
+<script type="text/javascript" src="./public/js/verify.js"></script>
+<script>
+  //验证码
+  $('#mpanel2').codeVerify({
+    type: 1,
+    width: '400px',
+    height: '50px',
+    fontSize: '30px',
+    codeLength: 6,
+    btnId: 'check-btn',
+    ready: function () {
+    },
+    success: function () {
+      submit();
+    },
+    error: function () {
+      alert('验证码错误匹配！');
+    }
+  });
+  //查询数据
+  function submit() {
+    var xm = $("#xm")
+      .val()
+      .trim();
+    var ksh = $("#ksh")
+      .val()
+      .trim();
+    var birthday = $("#birthday")
+      .val()
+      .trim();
+    $.ajax({
+      url: "http://127.0.0.1:8082/GetAchievement",
+      type: "post",
+      data: {
+        xm: xm,
+        ksh: ksh,
+        birthday: birthday
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.code == 0) {
+
+        } else {
+          alert(res.message);
+        }
+      }
+    });
+  }
+</script>
+
+</html>
