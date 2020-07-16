@@ -2,7 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var db = require('./db');
-
+//项目运行端口
+var port = 8082;
 app.use('/public', express.static('public'));
 
 //创建application/x-www-form-urlencoded编码解析
@@ -35,7 +36,7 @@ app.post('/GetAchievement', urlencodedParser, function (req, res) {
 
 })
 
-var server = app.listen(8082, function () {
+var server = app.listen(port, function () {
     var port = server.address().port;
     console.log('应用实例，访问地址为 http://127.0.0.1:', port);
 })
